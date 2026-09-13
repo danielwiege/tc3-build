@@ -1,29 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.19041</TargetFramework>
     <SupportedOSPlatform>windows</SupportedOSPlatform>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <PackageId>Tc3Build</PackageId>
+    <Description>Reusable TwinCAT 3 build automation API for Visual Studio projects.</Description>
+    <PackageTags>twincat;beckhoff;automation;build;plc;ci</PackageTags>
+    <RepositoryUrl>https://github.com/danielwiege/tc3-build</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Reusable Visual Studio API for TwinCAT 3 build, validation, activation, and PLC library installation.</PackageReleaseNotes>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <Platforms>x64</Platforms>
     <PlatformTarget>x64</PlatformTarget>
-    <PackageId>Tc3Build.Core</PackageId>
-    <Description>Reusable TwinCAT 3 build automation API for Windows.</Description>
-    <PackageTags>twincat;beckhoff;automation;build;plc;ci</PackageTags>
-    <RepositoryUrl>https://github.com/danielwiege/tc3-build</RepositoryUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\Tc3Build\Tc3Build\Infrastructure\*.cs" LinkBase="Infrastructure" />
     <Compile Include="..\Tc3Build\Tc3Build\Options\*.cs" LinkBase="Options" />
-    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Beckhoff.TwinCAT.TCatSysManager" Version="4026.26.0" />
     <PackageReference Include="Microsoft.VisualStudio.Interop" Version="17.14.40260" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

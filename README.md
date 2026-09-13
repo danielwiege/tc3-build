@@ -15,24 +15,17 @@ Requirements:
 
 ### Distribution and reuse
 
-Tc3Build is distributed in two forms. The ZIP contains the ready-to-run Windows
-x64 application. The `Tc3Build` NuGet package is a .NET tool and is suitable for
-reproducible CI/CD pipelines:
+Tc3Build is distributed in two forms for two different use cases: one NuGet
+package for direct use from C# projects in Visual Studio, and a ready-to-run
+Windows x64 ZIP for pipeline servers. The implementation is shared; the CLI
+host is not duplicated in the NuGet package.
 
 ```powershell
-dotnet new tool-manifest
-dotnet tool install Tc3Build --version 0.2.0
-dotnet tool restore
-dotnet tool run tc3build build -p .\TwinCAT\TwinCAT.slnx -n Project -s
+dotnet add package Tc3Build --version 0.3.0
 ```
 
-The `Tc3Build.Core` NuGet package exposes the same implementation as a C# API.
-It can be referenced by another Visual Studio project without starting a second
-Tc3Build process:
-
-```powershell
-dotnet add package Tc3Build.Core --version 0.2.0
-```
+The package exposes the reusable C# API. A Visual Studio application can call
+the same implementation directly without starting a second Tc3Build process:
 
 ```csharp
 using Tc3Build.Core;
@@ -50,8 +43,26 @@ var exitCode = runner.Run(new Tc3BuildRequest(
 
 The calling application must be a Windows x64 application running in an STA
 thread and must have a compatible Visual Studio or TwinCAT XAE installation.
-Both packages use the same Core implementation; the CLI does not contain a
-second copy of the TwinCAT automation code.
+
+For CI/CD, download the ZIP release and invoke the included executable:
+
+```powershell
+.\Tc3Build.exe build -p D:\Build\TwinCAT\TwinCAT.slnx -n Project -c Release -s
+```
+
+The ZIP is self-contained except for the required TwinCAT/Visual Studio
+installation on the build machine. It is therefore the preferred artifact for
+pipeline servers; no NuGet restore is required there.
+
+To create both release artifacts locally for a new version, run:
+
+```powershell
+.\scripts\Pack-Tc3Build.ps1 -Version 0.3.0
+```
+
+The script builds and tests the solution, creates exactly one `Tc3Build` NuGet
+package, publishes the Windows x64 CLI, and creates the corresponding ZIP in
+`artifacts`.
 
 Build and run from the repository root:
 

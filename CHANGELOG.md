@@ -9,14 +9,21 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 No unreleased changes yet.
 
+## [0.3.0] - 2026-09-13
+
+### Changed
+
+- Consolidated the reusable Visual Studio API into the single `Tc3Build` NuGet package.
+- Kept the CLI as a ready-to-run Windows x64 ZIP for pipeline servers.
+- Added `scripts/Pack-Tc3Build.ps1` for repeatable NuGet and ZIP creation.
+
 ## [0.2.0] - 2026-09-13
 
 ### Added
 
-- `Tc3Build` as a NuGet-packaged .NET tool for reproducible CI/CD installation.
-- `Tc3Build.Core` as a reusable NuGet library for direct use from C# projects.
+- `Tc3Build` as a reusable NuGet library for direct use from C# projects.
 - A public `Tc3BuildRunner` API with typed operation and request models.
-- ZIP and NuGet packaging metadata for the same implementation.
+- ZIP packaging for the Windows CLI used by CI/CD pipelines.
 
 ## [0.1.0] - 2026-09-13
 
@@ -40,6 +47,7 @@ No unreleased changes yet.
 - Silent-mode startup dialogs and save prompts when Tc3Build owns the IDE process.
 - Automatic fallback from modern `.slnx` to the adjacent classic `.sln` where required by the selected automation host.
 
-[Unreleased]: https://github.com/danielwiege/tc3-build/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/danielwiege/tc3-build/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/danielwiege/tc3-build/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/danielwiege/tc3-build/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/danielwiege/tc3-build/releases/tag/v0.1.0
