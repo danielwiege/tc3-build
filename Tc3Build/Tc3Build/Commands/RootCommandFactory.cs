@@ -10,14 +10,15 @@ internal static class RootCommandFactory
     {
         executor ??= options => new TwinCatBuildService().Execute(options);
         var rootCommand = new RootCommand("Build, validate, activate, and install TwinCAT 3 projects.");
+        rootCommand.Options.Add(new VersionOption("--version", "-v"));
         rootCommand.Subcommands.Add(CreateCommand(
             "build",
             "Build a selected TwinCAT project or all projects in a solution.\n\n" +
             "Examples:\n" +
-            "  Tc3Build.exe build -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -n Project -c Debug -t \"TwinCAT RT (x64)\"\n" +
-            "  Tc3Build.exe build -p D:\\Git\\tc3-build\\twincat\\Project\\Project\\Project.tsproj -s\n" +
-            "  Tc3Build.exe build -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -A\n" +
-            "  Tc3Build.exe build -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -n Project --host vs2019",
+            "  Tc3Build.exe build -p .\\TwinCAT\\TwinCAT.slnx -n Project -c Debug -t \"TwinCAT RT (x64)\"\n" +
+            "  Tc3Build.exe build -p .\\TwinCAT\\Project\\Project.tsproj -s\n" +
+            "  Tc3Build.exe build -p .\\TwinCAT\\TwinCAT.slnx -A\n" +
+            "  Tc3Build.exe build -p .\\TwinCAT\\TwinCAT.slnx -n Project --host vs2019",
             executeBuild: true,
             activate: false,
             installLibrary: false,
@@ -28,9 +29,9 @@ internal static class RootCommandFactory
             "validate",
             "Validate a TwinCAT solution or selected project without building.\n\n" +
             "Examples:\n" +
-            "  Tc3Build.exe validate -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -n Project\n" +
-            "  Tc3Build.exe validate -p D:\\Git\\tc3-build\\twincat\\Project\\Project\\Project.tsproj -s\n" +
-            "  Tc3Build.exe validate -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx --host xae2019",
+            "  Tc3Build.exe validate -p .\\TwinCAT\\TwinCAT.slnx -n Project\n" +
+            "  Tc3Build.exe validate -p .\\TwinCAT\\Project\\Project.tsproj -s\n" +
+            "  Tc3Build.exe validate -p .\\TwinCAT\\TwinCAT.slnx --host xae2019",
             executeBuild: false,
             activate: false,
             installLibrary: false,
@@ -41,9 +42,9 @@ internal static class RootCommandFactory
             "activate",
             "Activate an already built TwinCAT configuration.\n\n" +
             "Examples:\n" +
-            "  Tc3Build.exe activate -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -c Debug -t \"TwinCAT RT (x64)\"\n" +
-            "  Tc3Build.exe activate -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -s\n" +
-            "  Tc3Build.exe activate -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx --host vs2019",
+            "  Tc3Build.exe activate -p .\\TwinCAT\\TwinCAT.slnx -c Debug -t \"TwinCAT RT (x64)\"\n" +
+            "  Tc3Build.exe activate -p .\\TwinCAT\\TwinCAT.slnx -s\n" +
+            "  Tc3Build.exe activate -p .\\TwinCAT\\TwinCAT.slnx --host vs2019",
             executeBuild: false,
             activate: true,
             installLibrary: false,
@@ -54,9 +55,9 @@ internal static class RootCommandFactory
             "install-library",
             "Build and install a selected TwinCAT PLC library.\n\n" +
             "Examples:\n" +
-            "  Tc3Build.exe install-library -p D:\\Git\\tc3-build\\twincat\\Project\\Project.slnx -n Library -c Debug -t \"TwinCAT RT (x64)\" -s\n" +
-            "  Tc3Build.exe install-library -p D:\\Git\\tc3-build\\twincat\\Project\\Library\\Library.tspproj -o D:\\Build\\Library.library -s\n" +
-            "  Tc3Build.exe install-library -p D:\\Git\\tc3-build\\twincat\\Project\\Library\\Library.tspproj --host xae2019",
+            "  Tc3Build.exe install-library -p .\\TwinCAT\\TwinCAT.slnx -n Library -c Debug -t \"TwinCAT RT (x64)\" -s\n" +
+            "  Tc3Build.exe install-library -p .\\TwinCAT\\Library\\Library.tspproj -o .\\artifacts\\Library.library -s\n" +
+            "  Tc3Build.exe install-library -p .\\TwinCAT\\Library\\Library.tspproj --host xae2019",
             executeBuild: true,
             activate: false,
             installLibrary: true,
@@ -79,7 +80,7 @@ internal static class RootCommandFactory
         var command = new Command(name, description);
         var projectOption = new Option<string>("--project", "-p")
         {
-            Description = "Path to a .slnx/.sln solution or a .tsproj/.tspproj/.plcproj project. Example: -p .\\twincat\\Project\\Project.slnx",
+            Description = "Path to a .slnx/.sln solution or a .tsproj/.tspproj/.plcproj project. Example: -p .\\TwinCAT\\TwinCAT.slnx",
             Required = true
         };
         var targetProjectOption = new Option<string?>("--project-name", "-n")
