@@ -7,6 +7,12 @@
   <Project Path="Tc3Build/Tc3Build.csproj">
     <Platform Project="x64" />
   </Project>
+  <Project Path="../Tc3Build.Core/Tc3Build.Core.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="../Tc3Build.Tool/Tc3Build.Tool.csproj">
+    <Platform Project="x64" />
+  </Project>
   <Project Path="Tc3Build.Tests/Tc3Build.Tests.csproj">
     <Platform Project="x64" />
   </Project>

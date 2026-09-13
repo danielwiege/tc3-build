@@ -1,12 +1,12 @@
 namespace Tc3Build.Infrastructure;
 
-internal sealed record AutomationHostDefinition(
+public sealed record AutomationHostDefinition(
     string Key,
     string DisplayName,
     string ProgId,
     bool IsVisualStudio);
 
-internal static class AutomationHostCatalog
+public static class AutomationHostCatalog
 {
     // Newest Visual Studio first, then TwinCAT XAE Shell as fallback.
     public static IReadOnlyList<AutomationHostDefinition> All { get; } =

@@ -9,6 +9,15 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 No unreleased changes yet.
 
+## [0.2.0] - 2026-09-13
+
+### Added
+
+- `Tc3Build` as a NuGet-packaged .NET tool for reproducible CI/CD installation.
+- `Tc3Build.Core` as a reusable NuGet library for direct use from C# projects.
+- A public `Tc3BuildRunner` API with typed operation and request models.
+- ZIP and NuGet packaging metadata for the same implementation.
+
 ## [0.1.0] - 2026-09-13
 
 ### Added
@@ -31,5 +40,6 @@ No unreleased changes yet.
 - Silent-mode startup dialogs and save prompts when Tc3Build owns the IDE process.
 - Automatic fallback from modern `.slnx` to the adjacent classic `.sln` where required by the selected automation host.
 
-[Unreleased]: https://github.com/danielwiege/tc3-build/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/danielwiege/tc3-build/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/danielwiege/tc3-build/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/danielwiege/tc3-build/releases/tag/v0.1.0

@@ -59,6 +59,11 @@ bld/
 *.compileinfo
 *.asm
 *.core
+# The reusable Tc3Build.Core project is source code, not generated TwinCAT data.
+!Tc3Build.Core/
+!Tc3Build.Core/*.csproj
+!Tc3Build.Core/Public/
+!Tc3Build.Core/Public/**
 LineIDs.dbg
 LineIDs.dbg.bak
 

@@ -11,7 +11,7 @@ using Tc3Build.Options;
 
 namespace Tc3Build.Infrastructure;
 
-internal sealed class TwinCatBuildService
+public sealed class TwinCatBuildService
 {
     private const int AutomationHostTimeoutSeconds = 60;
     private readonly BuildLogger logger = new();

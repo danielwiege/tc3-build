@@ -7,7 +7,7 @@ namespace Tc3Build.Infrastructure;
 /// automation call. Beckhoff recommends this filter for Automation Interface
 /// clients running in an STA.
 /// </summary>
-internal static class ComMessageFilter
+public static class ComMessageFilter
 {
     private static IOleMessageFilter? registeredFilter;
 

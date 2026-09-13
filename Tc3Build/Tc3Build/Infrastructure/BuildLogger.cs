@@ -1,6 +1,6 @@
 namespace Tc3Build.Infrastructure;
 
-internal sealed class BuildLogger
+public sealed class BuildLogger
 {
     public void Info(string message) => Write("INFO", ConsoleColor.Gray, message);
 

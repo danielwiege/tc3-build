@@ -1,4 +1,5 @@
 using System.CommandLine;
+using Tc3Build.Core;
 using Tc3Build.Infrastructure;
 using Tc3Build.Options;
 
@@ -8,7 +9,7 @@ internal static class RootCommandFactory
 {
     public static RootCommand Create(Func<BuildOptions, int>? executor = null)
     {
-        executor ??= options => new TwinCatBuildService().Execute(options);
+        executor ??= options => new Tc3BuildRunner().Run(options);
         var rootCommand = new RootCommand("Build, validate, activate, and install TwinCAT 3 projects.");
         rootCommand.Options.Add(new VersionOption("--version", "-v"));
         rootCommand.Subcommands.Add(CreateCommand(

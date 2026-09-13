@@ -13,6 +13,46 @@ Requirements:
 - Visual Studio 2026 / .NET 10 SDK for compiling the console project
 - TwinCAT XAE Shell installed on the machine that runs the build
 
+### Distribution and reuse
+
+Tc3Build is distributed in two forms. The ZIP contains the ready-to-run Windows
+x64 application. The `Tc3Build` NuGet package is a .NET tool and is suitable for
+reproducible CI/CD pipelines:
+
+```powershell
+dotnet new tool-manifest
+dotnet tool install Tc3Build --version 0.2.0
+dotnet tool restore
+dotnet tool run tc3build build -p .\TwinCAT\TwinCAT.slnx -n Project -s
+```
+
+The `Tc3Build.Core` NuGet package exposes the same implementation as a C# API.
+It can be referenced by another Visual Studio project without starting a second
+Tc3Build process:
+
+```powershell
+dotnet add package Tc3Build.Core --version 0.2.0
+```
+
+```csharp
+using Tc3Build.Core;
+
+var runner = new Tc3BuildRunner();
+var exitCode = runner.Run(new Tc3BuildRequest(
+    ProjectPath: @"D:\Build\TwinCAT\TwinCAT.slnx",
+    Operation: Tc3BuildOperation.Build,
+    TargetProjectName: "Project",
+    Configuration: "Release",
+    Platform: "TwinCAT RT (x64)",
+    Silent: true,
+    AutomationHost: "vs2026"));
+```
+
+The calling application must be a Windows x64 application running in an STA
+thread and must have a compatible Visual Studio or TwinCAT XAE installation.
+Both packages use the same Core implementation; the CLI does not contain a
+second copy of the TwinCAT automation code.
+
 Build and run from the repository root:
 
 ```powershell

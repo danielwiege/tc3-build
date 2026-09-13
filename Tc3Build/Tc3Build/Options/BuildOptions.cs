@@ -1,6 +1,6 @@
 namespace Tc3Build.Options;
 
-internal sealed record BuildOptions(
+public sealed record BuildOptions(
     string ProjectPath,
     string? Configuration,
     string? Platform,
